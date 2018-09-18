@@ -16,10 +16,25 @@ class PaillierPrivateKey():
         self.u = u
         self.n = n
 
+
 class PaillierPublicKey():
     def __init__(self, n, g):
         self.n = n
         self.g = g
+
+
+class PaillierCiphertext():
+    def __init__(self, c, n):
+        self.c = c
+        self.n = n
+
+    def __mul__(self, other):
+        if self.n != other.n:
+            raise RuntimeException("Both ciphertexts must have same bit-length!")
+        return PaillierCiphertext((self.c * other.c) % self.n**2, self.n)
+
+    def __pow__(self, other):
+        return PaillierCiphertext((self.c ** other) % self.n**2, self.n)
 
 
 def encrypt(m, public_key):
@@ -29,10 +44,12 @@ def encrypt(m, public_key):
     n_sqr = public_key.n ** 2
     a = powmod(public_key.g, m, n_sqr)
     b = powmod(r, public_key.n, n_sqr)
-    return (a * b) % n_sqr
+    c = (a * b) % n_sqr
+    return PaillierCiphertext(c, public_key.n)
 
 
-def decrypt(c, private_key):
+def decrypt(p_c, private_key):
+    c = p_c.c
     a = powmod(c, private_key.l, private_key.n ** 2)
     return lf(a, private_key.n) * private_key.u % private_key.n
  
@@ -50,11 +67,11 @@ def keygen(n_len=2048):
         raise RuntimeException("Critical error: gcd(N,tot(N)) != 1")
 
     g = mpz()
-    while gcd(g, n**2) != 1:
+    n_sqr = n**2
+    while gcd(g, n_sqr) != 1:
         g = random_lt_n(n)
 
-    print("g:",g)
-    u = invert(lf(powmod(g, l, n**2), n), n)
+    u = invert(lf(powmod(g, l, n_sqr), n), n)
     public_key = PaillierPublicKey(n, g)
     private_key = PaillierPrivateKey(l, u, n)
     return PaillierKeyPair(public_key, private_key)
@@ -63,10 +80,19 @@ def keygen(n_len=2048):
 if __name__ == '__main__':
     p_pair = keygen()
     m = mpz(12)
-    print("M:",m)
-    c = encrypt(m, p_pair.public_key)
-    print("Ciphertext:", c)
-    print(gmpy2.bit_length(c))
-    d = decrypt(c, p_pair.private_key)
+    #print("M:",m)
+    p_c = encrypt(m, p_pair.public_key)
+    #print("Ciphertext:", p_c.c)
+    #print(gmpy2.bit_length(p_c.c))
+    d = decrypt(p_c, p_pair.private_key)
     print("d:",d)
+    print("Testing homomorphism...")
+    m1 = mpz(20)
+
+    print("Addition, with m:",m1)
+    p_c1 = encrypt(m1, p_pair.public_key)
+    print(decrypt(p_c * p_c1, p_pair.private_key))
+    print("Multiplication")
+    print(decrypt(pow(p_c, m1), p_pair.private_key))
+    
     
