@@ -10,6 +10,7 @@ setuptools.setup(
     author_email="carlton@linux.com",
     description="A simple implementation of the Paillier cryptosystem",
     long_description=long_description,
+    long_description_content_type="text/markdown",
     url="https://github.com/carltonshepherd/paillier-lib",
     packages=setuptools.find_packages(),
     classifiers=[

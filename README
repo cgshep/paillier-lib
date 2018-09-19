@@ -1,6 +1,6 @@
 # paillier-lib
 
-This package provides a simple implementation of the Paillier cryptosystem using `gmpy2`.
+This package provides a simple implementation of the Paillier cryptosystem using gmpy2.
 
 # Usage
 
@@ -30,7 +30,7 @@ paillier.decrypt(c1 * m3, key_pair.private_key) # => 20
 
 # Requirements
 
-`gmpy2` (tested v2.0.8)
+gmpy2 (tested v2.0.8)
 
 # Planned Work
 * Encode inputs, rather than requiring GMP MPZ objects.
