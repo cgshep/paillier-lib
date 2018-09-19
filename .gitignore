@@ -3,3 +3,5 @@
 ~*
 .cache*
 __pycache*
+dist
+*.egg-info
