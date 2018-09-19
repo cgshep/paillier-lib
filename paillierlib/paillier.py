@@ -1,4 +1,4 @@
-from utils import generate_prime, lf, random_lt_n
+from .utils import generate_prime, lf, random_lt_n
 from gmpy2 import lcm, gcd, invert, powmod, mpz
 
 
