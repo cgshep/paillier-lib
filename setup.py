@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="paillierlib1",
+    name="paillierlib",
     version="0.0.1",
     author="Carlton Shepherd",
     author_email="carlton@linux.com",
