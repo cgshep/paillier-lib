@@ -21,6 +21,7 @@ setuptools.setup(
         "Intended Audience :: Science/Research",
         "Development Status :: 3 - Alpha"
     ],
+    keywords='encryption,decryption,homomorphic,crypto,cryptography,security,privacy',
     install_requires=[
         "gmpy2>=2.0.0",
     ]
