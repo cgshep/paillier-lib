@@ -26,14 +26,23 @@ class PaillierCiphertext():
         self.n = n
         self.n_sqr = n**2
 
-    def __mul__(self, other):
+    def __add__(self, other):
         return PaillierCiphertext((self.c * other.c) % self.n_sqr, self.n)
+
+    def __radd__(self, other):
+        return __add__(self, other)
+
+    def __mul__(self, other):
+        return PaillierCiphertext((self.c ** other) % self.n_sqr, self.n)
 
     def __rmul__(self, other):
         return __mul__(self, other)
 
-    def __pow__(self, other):
-        return PaillierCiphertext((self.c ** other) % self.n_sqr, self.n)
+    def __sub__(self, other):
+        return PaillierCiphertext((self.c * invert(other.c, self.n_sqr)) % self.n_sqr, self.n)
+
+    def __rsub__(self, other):
+        return __sub__(self, other)
 
     
 def encrypt(m, public_key):
