@@ -5,8 +5,7 @@ This package provides a simple implementation of the Paillier cryptosystem using
 # Usage
 
 ```
-import paillier
-
+from paillierlib import paillier
 from gmpy2 import mpz
 
 key_pair = paillier.keygen()  # Optional param.: bit size (default = 2048)
