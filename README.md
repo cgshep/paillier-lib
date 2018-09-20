@@ -27,6 +27,12 @@ paillier.decrypt(c1 * m3, key_pair.private_key) # => 20
 
 ```
 
+# Tests
+Located in ./paillierlib/test_paillier.py. Execute using pytest:
+```
+pytest
+```
+
 # Requirements
 
 gmpy2 (tested v2.0.8)
