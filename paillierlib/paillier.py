@@ -60,10 +60,12 @@ def decrypt(p_c, private_key):
 def keygen(n_len=2048):
     n = 0
     p = q = None
-    while n.bit_length() != n_len and p == q:
+    while n.bit_length() != n_len:
         p = generate_prime(n_len // 2)
         q = generate_prime(n_len // 2)
-        n = p * q        
+        while p == q:
+            q = generate_prime(n_len // 2)
+        n = p * q         
 
     l = lcm(p-1, q-1)
     if gcd(p*q, (p-1)*(q-1)) != 1:
