@@ -1,4 +1,4 @@
-# paillier-lib
+# paillierlib
 
 This package provides a simple implementation of the Paillier cryptosystem using gmpy2.
 
