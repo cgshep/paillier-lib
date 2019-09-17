@@ -1,6 +1,6 @@
 # paillierlib
 
-This package provides a simple implementation of the Paillier cryptosystem using gmpy2.
+This package provides a simple implementation of the Paillier cryptosystem.
 
 # Usage
 
@@ -28,14 +28,8 @@ paillier.decrypt(c1 * m3, key_pair.private_key) # => 20
 ```
 
 # Tests
-Located in ./paillierlib/test_paillier.py. Execute using pytest:
-```
-pytest
-```
+Located in ```./paillierlib/test_paillier.py```. Execute using pytest:```pytest```.
 
 # Requirements
 
 gmpy2 (tested v2.0.8)
-
-# Planned Work
-* Encode inputs, rather than requiring GMP MPZ objects.
