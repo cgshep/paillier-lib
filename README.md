@@ -1,5 +1,12 @@
 # paillierlib
 
+<p>
+   <img alt="PyPI" src="https://img.shields.io/pypi/v/paillierlib">
+   <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/paillierlib">
+   <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/paillierlib">
+   <img alt="PyPI - License" src="https://img.shields.io/pypi/l/paillierlib?label=license">
+</p>
+
 This package provides a simple implementation of the Paillier cryptosystem.
 
 # Usage
